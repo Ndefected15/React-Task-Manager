@@ -1,11 +1,11 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import TaskForm from './components/taskForm';
+import Layout from './components/layout';
 function App() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<TaskForm />} />
+				<Route path="/" element={<Layout />} />
 			</Routes>
 		</>
 	);
