@@ -15,13 +15,20 @@ connection.connect(function (err) {
 exports.createTask = async (req, res) => {
 	try {
 		const { description, status, priority, due_date } = req.body;
+
+		// Check if required fields are present
+		if (!description || !status || !priority || !due_date) {
+			return res.status(400).send('Missing required fields');
+		}
+
 		const query =
 			'INSERT INTO tasks (description, status, priority, due_date) VALUES (?,?,?,?)';
 		const values = [description, status, priority, due_date];
 
 		connection.query(query, values, function (err, result) {
 			if (err) {
-				throw err;
+				console.error(err);
+				return res.status(500).send('Error inserting task');
 			}
 			console.log('1 record inserted');
 			res.status(201).send('Task created successfully'); // Send a success response

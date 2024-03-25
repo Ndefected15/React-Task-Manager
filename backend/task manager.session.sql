@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS `tasks` (
+    taskid INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL,
     status ENUM('To Do', 'In Progress', 'Completed') NOT NULL,
     priority INT,
@@ -7,5 +8,4 @@ CREATE TABLE IF NOT EXISTS `tasks` (
     creator_id INT, -- Foreign key referencing users table
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-
-)
+);
