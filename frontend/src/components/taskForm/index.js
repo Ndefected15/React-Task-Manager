@@ -53,13 +53,20 @@ const TaskForm = () => {
 					onChange={handleChange}
 				/>
 				<label htmlFor="status">Status</label>
-				<input
-					type="text"
+				<select
 					name="status"
 					id="status"
 					value={formData.status}
 					onChange={handleChange}
-				/>
+				>
+					<option value="" className="placeholder" hidden>
+						Choose Status
+					</option>
+					<option value="To Do">To Do</option>
+					<option value="In Progress">In Progress</option>
+					<option value="Completed">Completed</option>
+				</select>
+
 				<label htmlFor="priority">Priority</label>
 				<input
 					type="text"
@@ -70,7 +77,7 @@ const TaskForm = () => {
 				/>
 				<label htmlFor="due_date">Due Date</label>
 				<input
-					type="text"
+					type="date"
 					name="due_date"
 					id="due_date"
 					value={formData.due_date}

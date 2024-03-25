@@ -1,14 +1,18 @@
 /* Styles for the form container */
-.form {
-	width: 300px;
+form {
+	width: 25%;
 	margin: 0 auto;
+	height: 300px;
 }
 
 /* Styles for form elements */
-.form-group {
+form-group {
 	margin-bottom: 20px;
 }
 
+placeholder {
+	
+}
 label {
 	display: block;
 	margin-bottom: 5px;
