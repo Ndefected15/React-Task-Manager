@@ -28,7 +28,6 @@ exports.createTask = async (req, res) => {
 		connection.query(query, values, function (err, result) {
 			if (err) {
 				console.error(err);
-				return res.status(500).send('Error inserting task');
 			}
 			console.log('1 record inserted');
 			res.status(201).send('Task created successfully'); // Send a success response
@@ -36,5 +35,24 @@ exports.createTask = async (req, res) => {
 	} catch (err) {
 		console.error(err);
 		res.status(500).send('Error inserting task'); // Send an error response
+	}
+};
+
+exports.getTasks = async (req, res) => {
+	try {
+		const query = 'SELECT * FROM tasks';
+
+		connection.query(query, function (err, rows) {
+			if (err) {
+				console.error(err);
+				res.status(500).send('Error retrieving tasks');
+			} else {
+				console.log('Tasks Retrieved');
+				res.status(200).json(rows); // Sending tasks data as JSON response
+			}
+		});
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Error retrieving tasks');
 	}
 };

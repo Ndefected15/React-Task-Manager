@@ -1,8 +1,8 @@
-// api.js
+const API_URL = 'http://localhost:3000'; // Update with your backend URL
 
 export const createTask = async (taskData) => {
 	try {
-		const response = await fetch('http://localhost:3000/tasks', {
+		const response = await fetch(`${API_URL}/tasks`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -20,5 +20,20 @@ export const createTask = async (taskData) => {
 	} catch (error) {
 		console.error('Error:', error);
 		throw error; // Rethrow the error to handle it in the calling code
+	}
+};
+
+export const getTasks = async () => {
+	try {
+		const response = await fetch(`${API_URL}/tasks`, {
+			method: 'GET',
+			headers: {
+				'content-type': 'application/json',
+			},
+		});
+		return await response.json();
+	} catch (error) {
+		console.error('Error getting tasks:', error);
+		throw error;
 	}
 };

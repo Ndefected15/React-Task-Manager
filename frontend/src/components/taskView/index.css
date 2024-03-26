@@ -1,0 +1,30 @@
+.task-container {
+	margin-top: 20px;
+	width: 25%;
+}
+
+.task-container ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.task-container ul li {
+	background-color: #f9f9f9;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	padding: 10px;
+	cursor: pointer; /* Add cursor property to make the li items clickable */
+	transition: background-color 0.3s; /* Add transition effect for smooth color change */
+}
+
+.task-container ul li:hover {
+	background-color: #eaeaea; /* Change background color on hover */
+}
+
+.task-container ul li:last-child {
+	margin-bottom: 0;
+}
+
+.task-details {
+}
