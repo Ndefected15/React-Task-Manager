@@ -54,6 +54,7 @@ const TaskView = () => {
 			{selectedTaskId !== null && (
 				<div className="task-details">
 					<h3>Task Details</h3>
+					<button onClick={() => setSelectedTaskId(null)}>Close</button>
 					<div>
 						<div className="created">
 							Created:{' '}
