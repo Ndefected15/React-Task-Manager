@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
-	password: '&K2AuuhST5',
+	password: 'password',
 	database: 'tasks',
 });
 
@@ -38,7 +38,7 @@ exports.createTask = async (req, res) => {
 	}
 };
 
-exports.getTasks = async (req, res) => {
+exports.getAllTasks = async (req, res) => {
 	try {
 		const query = 'SELECT * FROM tasks';
 
@@ -54,5 +54,27 @@ exports.getTasks = async (req, res) => {
 	} catch (err) {
 		console.error(err);
 		res.status(500).send('Error retrieving tasks');
+	}
+};
+
+exports.deleteTask = async (req, res) => {
+	try {
+		const { taskid } = req.params;
+
+		const query = 'DELETE FROM tasks WHERE taskid =?';
+		const values = [taskid];
+
+		connection.query(query, values, function (err, result) {
+			if (err) {
+				console.error(err);
+				res.status(500).send('Error deleting task');
+			} else {
+				console.log('1 record deleted');
+				res.status(200).send('Task deleted successfully');
+			}
+		});
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Error deleting task');
 	}
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getTasks } from '../../services/api';
+import { getAllTasks, deleteTask } from '../../services/api';
 import './index.css';
 
 const TaskView = () => {
@@ -12,15 +12,24 @@ const TaskView = () => {
 
 	const fetchTasks = async () => {
 		try {
-			const tasksData = await getTasks();
+			const tasksData = await getAllTasks();
 			setTasks(tasksData);
 		} catch (error) {
 			console.error('Error fetching tasks:', error);
 		}
 	};
 
-	const handleTaskClick = (taskId) => {
-		setSelectedTaskId(taskId);
+	const removeTask = async (taskid) => {
+		try {
+			await deleteTask(taskid);
+			fetchTasks();
+		} catch (error) {
+			console.error('index.js Error deleting task:', error);
+		}
+	};
+
+	const handleTaskClick = (taskid) => {
+		setSelectedTaskId(taskid);
 	};
 
 	return (
@@ -42,22 +51,32 @@ const TaskView = () => {
 					))}
 				</ul>
 			</div>
-			{selectedTaskId && (
+			{selectedTaskId !== null && (
 				<div className="task-details">
 					<h3>Task Details</h3>
 					<div>
 						<div className="created">
-							Created: {tasks[selectedTaskId - 1].created_at}
+							Created:{' '}
+							{tasks.find((task) => task.taskid === selectedTaskId)?.created_at}
 						</div>
 						<div className="description">
-							Description: {tasks[selectedTaskId - 1].description}
+							Description:{' '}
+							{
+								tasks.find((task) => task.taskid === selectedTaskId)
+									?.description
+							}
 						</div>
 						<div className="status">
-							Status: {tasks[selectedTaskId - 1].status}
+							Status:{' '}
+							{tasks.find((task) => task.taskid === selectedTaskId)?.status}
 						</div>
 						<div className="priority">
-							Priority: {tasks[selectedTaskId - 1].priority}
+							Priority:{' '}
+							{tasks.find((task) => task.taskid === selectedTaskId)?.priority}
 						</div>
+						<button onClick={() => removeTask(selectedTaskId)}>
+							Delete Task
+						</button>
 					</div>
 				</div>
 			)}

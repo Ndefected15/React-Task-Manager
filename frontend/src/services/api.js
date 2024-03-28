@@ -23,7 +23,7 @@ export const createTask = async (taskData) => {
 	}
 };
 
-export const getTasks = async () => {
+export const getAllTasks = async () => {
 	try {
 		const response = await fetch(`${API_URL}/tasks`, {
 			method: 'GET',
@@ -34,6 +34,22 @@ export const getTasks = async () => {
 		return await response.json();
 	} catch (error) {
 		console.error('Error getting tasks:', error);
+		throw error;
+	}
+};
+
+export const deleteTask = async (taskid) => {
+	try {
+		const response = await fetch(`${API_URL}/tasks/${taskid}`, {
+			method: 'DELETE',
+			headers: {
+				'content-type': 'application/json',
+			},
+		});
+		console.log('Success:', taskid);
+		return await response.json();
+	} catch (error) {
+		console.error('API.js Error deleting task:', error);
 		throw error;
 	}
 };
